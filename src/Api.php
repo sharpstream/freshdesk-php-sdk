@@ -189,7 +189,7 @@ class Api
     {
         $this->validateConstructorArgs($apiKey, $domain);
 
-        $this->baseUrl = sprintf('https://%s.freshdesk.com/api/v2', $domain);
+        $this->baseUrl = sprintf('https://%s.freshservice.com/api/v2', $domain);
 
         $this->client = new Client([
                 'auth' => [$apiKey, 'X']
