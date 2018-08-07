@@ -257,7 +257,9 @@ class Api
                     return null;
             }
         } catch (RequestException $e) {
-            throw ApiException::create($e);
+            // Error message gets truncated by Guzzle, so modify it here
+            $actualError = $e->getResponse()->getBody()->getContents();
+            throw ApiException::create($e, $actualError);
         }
     }
 

@@ -27,29 +27,29 @@ class ApiException extends Exception
      * MethodNotAllowedException|NotFoundException|RateLimitExceededException|UnsupportedAcceptHeaderException|
      * UnsupportedContentTypeException|ValidationException
      */
-     public static function create(RequestException $e) {
+     public static function create(RequestException $e, $actualError = null) {
 
          if($response = $e->getResponse()) {
              
              switch ($response->getStatusCode()) {
                  case 400:
-                     return new ValidationException($e);
+                     return new ValidationException($e, $actualError);
                  case 401:
-                     return new AuthenticationException($e);
+                     return new AuthenticationException($e, $actualError);
                  case 403:
-                     return new AccessDeniedException($e);
+                     return new AccessDeniedException($e, $actualError);
                  case 404:
-                     return new NotFoundException($e);
+                     return new NotFoundException($e, $actualError);
                  case 405:
-                     return new MethodNotAllowedException($e);
+                     return new MethodNotAllowedException($e, $actualError);
                  case 406:
-                     return new UnsupportedAcceptHeaderException($e);
+                     return new UnsupportedAcceptHeaderException($e, $actualError);
                  case 409:
-                     return new ConflictingStateException($e);
+                     return new ConflictingStateException($e, $actualError);
                  case 415:
-                     return new UnsupportedContentTypeException($e);
+                     return new UnsupportedContentTypeException($e, $actualError);
                  case 429:
-                     return new RateLimitExceededException($e);
+                     return new RateLimitExceededException($e, $actualError);
              }
          }
 
@@ -82,9 +82,9 @@ class ApiException extends Exception
      * @param RequestException $e
      * @internal
      */
-    public function __construct(RequestException $e)
+    public function __construct(RequestException $e, $message = null)
     {
         $this->exception = $e;
-        parent::__construct();
+        parent::__construct($message);
     }
 }
