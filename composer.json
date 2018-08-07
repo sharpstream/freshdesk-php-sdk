@@ -1,5 +1,5 @@
 {
-    "name": "mpclarkson/freshdesk-php-sdk",
+    "name": "sharpstream/freshdesk-php-sdk",
     "description": "PHP SDK for the Freshdesk API (v2)",
     "type": "library",
     "homepage": "https://github.com/mpclarkson/freshdesk-php-sdk",
